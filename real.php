@@ -17,7 +17,6 @@ function processRequest()
     switch ($action) {
         case 'upload': { // handle file upload
                 header('Content-type: text/plain; charset=utf-8');
-
                 $fileUrls = handleUploadedFiles();
                 if (is_array($fileUrls) && count($fileUrls) > 0) {
                     foreach ($fileUrls as $index => $filename) {
@@ -33,6 +32,8 @@ function processRequest()
                 } else {
                     print('ERROR: no file uploaded');
                 }
+                header('Content-Type: application/json; charset=utf-8');
+                echo json_encode($fileUrls);
                 return; // without printing footer
             }
             break;
@@ -229,10 +230,10 @@ function getCurrentPageURL()
 {
     $defaultPort = "80";
     $pageURL = 'http';
-    if ($_SERVER["HTTPS"] == "on") {
-        $pageURL .= "s";
-        $defaultPort = "443";
-    }
+    // if ($_SERVER["HTTPS"] == "on") {
+    //     $pageURL .= "s";
+    //     $defaultPort = "443";
+    // }
     $pageURL .= "://";
     if ($_SERVER["SERVER_PORT"] != $defaultPort) {
         $pageURL .= $_SERVER["SERVER_NAME"] . ":" . $_SERVER["SERVER_PORT"] . $_SERVER["REQUEST_URI"];
