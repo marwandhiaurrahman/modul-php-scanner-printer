@@ -26,14 +26,15 @@ function processRequest()
                         if (strpos($filename, 'ERROR:') === 0) {
                             print($filename); // error mesg
                         } else {
-                            print(dirname(getCurrentPageURL()) . str_replace(DIRECTORY_SEPARATOR, "/", substr(UPLOAD_DIR, strlen(__DIR__))) . $filename);
+                            // print(dirname(getCurrentPageURL()) . str_replace(DIRECTORY_SEPARATOR, "/", substr(UPLOAD_DIR, strlen(__DIR__))) . $filename);
+                            print($filename);
                         }
                     }
                 } else {
                     print('ERROR: no file uploaded');
                 }
-                header('Content-Type: application/json; charset=utf-8');
-                echo json_encode($fileUrls);
+                // header('Content-Type: application/json; charset=utf-8');
+                // echo json_encode($fileUrls);
                 return; // without printing footer
             }
             break;
